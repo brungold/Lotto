@@ -1,6 +1,7 @@
 package pl.lotto.domain.numberreceiver;
 
 import org.junit.jupiter.api.Test;
+import pl.lotto.domain.AdjustableClock;
 import pl.lotto.domain.numberreceiver.dto.InputNumberResultDto;
 import pl.lotto.domain.numberreceiver.dto.TicketDto;
 
@@ -14,10 +15,12 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class NumberReceiverFacadeTest {
+
+    AdjustableClock clock = new AdjustableClock(LocalDateTime.of(2023, 10, 10, 11, 30,0).toInstant(ZoneOffset.UTC), ZoneId.systemDefault());
     NumberReceiverFacade numberReceiverFacade = new NumberReceiverFacade(
             new NumberValidator(),
             new InMemoryNumberReceiverRepositoryTestImpl(),
-            Clock.fixed(LocalDateTime.of(2023, 10, 10, 11, 30,0).toInstant(ZoneOffset.UTC), ZoneId.systemDefault())
+            clock
     );
 
     @Test
