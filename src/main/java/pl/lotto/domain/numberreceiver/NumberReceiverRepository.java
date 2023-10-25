@@ -6,5 +6,7 @@ import java.util.List;
 public interface NumberReceiverRepository {
     Ticket save(Ticket ticket);
 
-    List<Ticket> findAllTicketsByDrawDate(LocalDateTime data);
+    List<Ticket> findAllTicketsByDrawDate(LocalDateTime drawData);
+
+    Ticket findByHash(String hash);
 }

@@ -72,8 +72,13 @@ class NumberReceiverFacadeTest {
         );
     }
 
-//    @Test
-//    public void should_return_failed_when_user_gave_more_than_six_numbers() {
-//
-//    }
+    @Test
+    public void should_return_failed_when_user_gave_more_than_six_numbers() {
+        //given
+        Set<Integer> numbersFromUser = Set.of(1, 2, 3, 4, 5);
+        //when
+        InputNumberResultDto result = numberReceiverFacade.inputNumbers(numbersFromUser);
+        //then
+        assertThat(result.message()).isEqualTo("failed");
+    }
 }
