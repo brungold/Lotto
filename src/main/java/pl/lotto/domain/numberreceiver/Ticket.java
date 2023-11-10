@@ -1,7 +1,9 @@
 package pl.lotto.domain.numberreceiver;
 
+import lombok.Builder;
+
 import java.util.Set;
 
-// encaj do bazy
-record Ticket(String hash, java.time.LocalDateTime drawDate, Set<Integer> numbersFromUser) {
+@Builder
+record Ticket(String hash, java.time.LocalDateTime drawDate, Set<Integer> numbers) {
 }
