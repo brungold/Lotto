@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import pl.lotto.domain.numbergenerator.dto.WinningNumbersDto;
-import pl.lotto.domain.numberreceiver.NumberReceiverFacade;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,7 +18,7 @@ class WinningNumbersGeneratorFacadeTest {
     NumberReceiverFacade numberReceiverFacade = mock(NumberReceiverFacade.class);
 
     @Test
-    public void it_should_return_set_of_required_size() {
+    public void should_return_set_of_required_size() {
         //given
         RandomNumberGenerable generator = new RandomGenerator();
         when(numberReceiverFacade.retrieveNextDrawDate()).thenReturn(LocalDateTime.now());
@@ -31,7 +30,7 @@ class WinningNumbersGeneratorFacadeTest {
     }
 
     @Test
-    public void it_should_return_set_of_required_size_within_required_range() {
+    public void should_return_set_of_required_size_within_required_range() {
         //given
         RandomNumberGenerable generator = new RandomGenerator();
         when(numberReceiverFacade.retrieveNextDrawDate()).thenReturn(LocalDateTime.now());
@@ -48,7 +47,7 @@ class WinningNumbersGeneratorFacadeTest {
     }
 
     @Test
-    public void it_should_throw_an_exception_when_number_not_in_range() {
+    public void should_throw_an_exception_when_number_not_in_range() {
         //given
         Set<Integer> numbersOutOfRange = Set.of(1, 2, 3, 4, 5, 100);
         RandomNumberGenerable generator = new WinningNumberGeneratorTestImpl(numbersOutOfRange);
@@ -60,7 +59,7 @@ class WinningNumbersGeneratorFacadeTest {
     }
 
     @Test
-    public void it_should_return_collection_of_unique_values() {
+    public void should_return_collection_of_unique_values() {
         //given
         RandomNumberGenerable generator = new WinningNumberGeneratorTestImpl();
         when(numberReceiverFacade.retrieveNextDrawDate()).thenReturn(LocalDateTime.now());
@@ -73,7 +72,7 @@ class WinningNumbersGeneratorFacadeTest {
     }
 
     @Test
-    public void it_should_return_winning_numbers_by_given_date() {
+    public void should_return_winning_numbers_by_given_date() {
         //given
         LocalDateTime drawDate = LocalDateTime.of(2022, 12, 17, 12, 0, 0);
         Set<Integer> generatedWinningNumbers = Set.of(1, 2, 3, 4, 5, 6);
@@ -98,7 +97,7 @@ class WinningNumbersGeneratorFacadeTest {
     }
 
     @Test
-    public void it_should_throw_an_exception_when_fail_to_retrieve_numbers_by_given_date() {
+    public void should_throw_an_exception_when_fail_to_retrieve_numbers_by_given_date() {
         //given
         LocalDateTime drawDate = LocalDateTime.of(2022, 12, 17, 12, 0, 0);
         RandomNumberGenerable generator = new WinningNumberGeneratorTestImpl();
@@ -110,7 +109,7 @@ class WinningNumbersGeneratorFacadeTest {
     }
 
     @Test
-    public void it_should_return_true_if_numbers_are_generated_by_given_date() {
+    public void should_return_true_if_numbers_are_generated_by_given_date() {
         //given
         LocalDateTime drawDate = LocalDateTime.of(2022, 12, 17, 12, 0, 0);
         Set<Integer> generatedWinningNumbers = Set.of(1, 2, 3, 4, 5, 6);
