@@ -2,12 +2,12 @@ package pl.lotto.domain.resultchecker;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import lombok.Builder;
 
-public record ResultDto(
+@Builder
+record Ticket(
         String hash,
         Set<Integer> numbers,
-        Set<Integer> hitNumbers,
-        LocalDateTime drawDate,
-        boolean isWinner
+        LocalDateTime drawDate
 ) {
 }

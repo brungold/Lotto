@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import pl.lotto.domain.resultannouncer.dto.ResponseDto;
 import pl.lotto.domain.resultannouncer.dto.ResultAnnouncerResponseDto;
 import pl.lotto.domain.resultchecker.ResultCheckerFacade;
-import pl.lotto.domain.resultchecker.ResultDto;
+import pl.lotto.domain.resultchecker.dto.ResultDto;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -28,7 +28,7 @@ public class ResultAnnouncerFacade {
     public ResultAnnouncerResponseDto checkResult(String hash) {
         if (responseRepository.existsById(hash)) {
             Optional<ResultResponse> resultResponseCached = responseRepository.findById(hash);
-            if(resultResponseCached.isPresent()){
+            if (resultResponseCached.isPresent()) {
                 return new ResultAnnouncerResponseDto(ResultMapper.mapToDto(resultResponseCached.get()), ALREADY_CHECKED.info);
             }
         }
