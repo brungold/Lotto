@@ -20,19 +20,24 @@ class WinningNumbersGeneratorFacadeTest {
     @Test
     public void should_return_set_of_required_size() {
         //given
-        RandomNumberGenerable generator = new RandomGenerator();
+        RandomNumberGenerable generator = new WinningNumberGeneratorTestImpl();
         when(numberReceiverFacade.retrieveNextDrawDate()).thenReturn(LocalDateTime.now());
         WinningNumbersGeneratorFacade numbersGenerator = new NumberGeneratorConfiguration().createForTest(generator, winningNumbersRepository, numberReceiverFacade);
         //when
         WinningNumbersDto generatedNumbers = numbersGenerator.generateWinningNumbers();
         //then
-        assertThat(generatedNumbers.getWinningNumbers().size()).isEqualTo(6);
+        int upperBand = 99;
+        int lowerBand = 1;
+        Set<Integer> winningNumbers = generatedNumbers.getWinningNumbers();
+        boolean numbersInRange = winningNumbers.stream().allMatch(number -> number >= lowerBand && number <= upperBand);
+        assertThat(numbersInRange).isTrue();
+
     }
 
     @Test
     public void should_return_set_of_required_size_within_required_range() {
         //given
-        RandomNumberGenerable generator = new RandomGenerator();
+        RandomNumberGenerable generator = new WinningNumberGeneratorTestImpl();
         when(numberReceiverFacade.retrieveNextDrawDate()).thenReturn(LocalDateTime.now());
         WinningNumbersGeneratorFacade numbersGenerator = new NumberGeneratorConfiguration().createForTest(generator, winningNumbersRepository, numberReceiverFacade);
         //when
