@@ -1,6 +1,7 @@
 package pl.lotto.domain.numbergenerator;
 
 import lombok.AllArgsConstructor;
+import pl.lotto.domain.numbergenerator.dto.SixRandomNumbersDto;
 import pl.lotto.domain.numbergenerator.dto.WinningNumbersDto;
 import pl.lotto.domain.numberreceiver.NumberReceiverFacade;
 
@@ -9,14 +10,17 @@ import java.util.Set;
 
 @AllArgsConstructor
 public class WinningNumbersGeneratorFacade {
-    private final RandomNumberGenerable winningNumberGenerator;
+
+    private final RandomNumberGenerable randomGenerable;
     private final WinningNumberValidator winningNumberValidator;
     private final WinningNumbersRepository winningNumbersRepository;
     private final NumberReceiverFacade numberReceiverFacade;
+    private final WinningNumbersGeneratorFacadeConfigurationProperties properties;
 
     public WinningNumbersDto generateWinningNumbers() {
         LocalDateTime nextDrawDate = numberReceiverFacade.retrieveNextDrawDate();
-        Set<Integer> winningNumbers = winningNumberGenerator.generateSixRandomNumbers();
+        SixRandomNumbersDto sixRandomNumbersDto = randomGenerable.generateSixRandomNumbers(properties.count(), properties.lowerBand(), properties.upperBand());
+        Set<Integer> winningNumbers = sixRandomNumbersDto.numbers();
         winningNumberValidator.validate(winningNumbers);
         winningNumbersRepository.save(WinningNumbers.builder()
                 .winningNumbers(winningNumbers)
