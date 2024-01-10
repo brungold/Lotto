@@ -1,4 +1,4 @@
-package pl.lotto.infrastructure;
+package pl.lotto.infrastructure.http;
 import java.io.IOException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatus.Series;
