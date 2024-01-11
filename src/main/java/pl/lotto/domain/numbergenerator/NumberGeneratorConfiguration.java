@@ -1,12 +1,13 @@
 package pl.lotto.domain.numbergenerator;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pl.lotto.domain.numberreceiver.NumberReceiverFacade;
 
 @Configuration
 public class NumberGeneratorConfiguration {
-
 
     @Bean
     WinningNumbersGeneratorFacade winningNumbersGeneratorFacade(WinningNumbersRepository winningNumbersRepository, NumberReceiverFacade numberReceiverFacade, RandomNumberGenerable randomNumberGenerator, WinningNumbersGeneratorFacadeConfigurationProperties properties) {

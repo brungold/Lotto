@@ -1,12 +1,11 @@
 package pl.lotto.domain.numbergenerator;
 
+import java.time.LocalDateTime;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import pl.lotto.domain.numbergenerator.dto.SixRandomNumbersDto;
 import pl.lotto.domain.numbergenerator.dto.WinningNumbersDto;
 import pl.lotto.domain.numberreceiver.NumberReceiverFacade;
-
-import java.time.LocalDateTime;
-import java.util.Set;
 
 @AllArgsConstructor
 public class WinningNumbersGeneratorFacade {
@@ -22,12 +21,14 @@ public class WinningNumbersGeneratorFacade {
         SixRandomNumbersDto sixRandomNumbersDto = randomGenerable.generateSixRandomNumbers(properties.count(), properties.lowerBand(), properties.upperBand());
         Set<Integer> winningNumbers = sixRandomNumbersDto.numbers();
         winningNumberValidator.validate(winningNumbers);
-        winningNumbersRepository.save(WinningNumbers.builder()
+        WinningNumbers winningNumbersDocument = WinningNumbers.builder()
                 .winningNumbers(winningNumbers)
                 .date(nextDrawDate)
-                .build());
+                .build();
+        WinningNumbers savedNumbers = winningNumbersRepository.save(winningNumbersDocument);
         return WinningNumbersDto.builder()
-                .winningNumbers(winningNumbers)
+                .winningNumbers(savedNumbers.winningNumbers())
+                .date(savedNumbers.date())
                 .build();
     }
 

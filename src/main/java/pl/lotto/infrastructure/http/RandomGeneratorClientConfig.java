@@ -1,4 +1,4 @@
-package pl.lotto.infrastructure;
+package pl.lotto.infrastructure.http;
 import java.time.Duration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
