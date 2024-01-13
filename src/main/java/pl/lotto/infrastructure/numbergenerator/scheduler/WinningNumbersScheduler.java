@@ -1,4 +1,4 @@
-package pl.lotto.infrastructure.scheduler;
+package pl.lotto.infrastructure.numbergenerator.scheduler;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.scheduling.annotation.Scheduled;

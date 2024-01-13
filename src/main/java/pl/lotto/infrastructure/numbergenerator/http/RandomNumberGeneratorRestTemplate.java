@@ -1,4 +1,4 @@
-package pl.lotto.infrastructure.http;
+package pl.lotto.infrastructure.numbergenerator.http;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;

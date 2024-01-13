@@ -5,13 +5,11 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 import pl.lotto.domain.resultannouncer.dto.ResponseDto;
 import pl.lotto.domain.resultannouncer.dto.ResultAnnouncerResponseDto;
 import pl.lotto.domain.resultchecker.ResultCheckerFacade;
 import pl.lotto.domain.resultchecker.dto.ResultDto;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -22,6 +20,7 @@ import static pl.lotto.domain.resultannouncer.MessageResponse.WAIT_MESSAGE;
 import static pl.lotto.domain.resultannouncer.MessageResponse.WIN_MESSAGE;
 
 class ResultAnnouncerFacadeTest {
+
     ResponseRepository responseRepository = new ResponseRepositoryTestImpl();
     ResultCheckerFacade resultCheckerFacade = mock(ResultCheckerFacade.class);
 
@@ -30,7 +29,7 @@ class ResultAnnouncerFacadeTest {
         //given
         LocalDateTime drawDate = LocalDateTime.of(2022, 12, 17, 12, 0, 0);
         String hash = "123";
-        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().createForTest(resultCheckerFacade, responseRepository, Clock.systemUTC());
+        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().resultAnnouncerFacade(resultCheckerFacade, responseRepository, Clock.systemUTC());
         ResultDto resultDto = ResultDto.builder()
                 .hash("123")
                 .numbers(Set.of(1, 2, 3, 4, 5, 6))
@@ -59,7 +58,7 @@ class ResultAnnouncerFacadeTest {
         //given
         LocalDateTime drawDate = LocalDateTime.of(2022, 12, 17, 12, 0, 0);
         String hash = "123";
-        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().createForTest(resultCheckerFacade, responseRepository, Clock.systemUTC());
+        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().resultAnnouncerFacade(resultCheckerFacade, responseRepository, Clock.systemUTC());
         ResultDto resultDto = ResultDto.builder()
                 .hash("123")
                 .numbers(Set.of(1, 2, 3, 4, 5, 6))
@@ -89,7 +88,7 @@ class ResultAnnouncerFacadeTest {
         LocalDateTime drawDate = LocalDateTime.of(2022, 12, 31, 12, 0, 0);
         String hash = "123";
         Clock clock = Clock.fixed(LocalDateTime.of(2022, 12, 17, 12, 0, 0).toInstant(ZoneOffset.UTC), ZoneId.systemDefault());
-        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().createForTest(resultCheckerFacade, responseRepository, clock);
+        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().resultAnnouncerFacade(resultCheckerFacade, responseRepository, clock);
         ResultDto resultDto = ResultDto.builder()
                 .hash("123")
                 .numbers(Set.of(1, 2, 3, 4, 5, 6))
@@ -117,7 +116,7 @@ class ResultAnnouncerFacadeTest {
     public void should_return_response_with_hash_does_not_exist_message_if_hash_does_not_exist() {
         //given
         String hash = "123";
-        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().createForTest(resultCheckerFacade, responseRepository, Clock.systemUTC());
+        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().resultAnnouncerFacade(resultCheckerFacade, responseRepository, Clock.systemUTC());
 
         when(resultCheckerFacade.findByHash(hash)).thenReturn(null);
         //when
@@ -141,7 +140,7 @@ class ResultAnnouncerFacadeTest {
                 .build();
         when(resultCheckerFacade.findByHash(hash)).thenReturn(resultDto);
 
-        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().createForTest(resultCheckerFacade, responseRepository, Clock.systemUTC());
+        ResultAnnouncerFacade resultAnnouncerFacade = new ResultAnnouncerConfiguration().resultAnnouncerFacade(resultCheckerFacade, responseRepository, Clock.systemUTC());
         ResultAnnouncerResponseDto resultAnnouncerResponseDto1 = resultAnnouncerFacade.checkResult(hash);
         String underTest = resultAnnouncerResponseDto1.responseDto().hash();
         //when
