@@ -3,7 +3,6 @@ package pl.lotto.domain.resultchecker;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 import pl.lotto.domain.numbergenerator.WinningNumbersGeneratorFacade;
 import pl.lotto.domain.numbergenerator.dto.WinningNumbersDto;
@@ -11,10 +10,10 @@ import pl.lotto.domain.numberreceiver.NumberReceiverFacade;
 import pl.lotto.domain.numberreceiver.dto.TicketDto;
 import pl.lotto.domain.resultchecker.dto.PlayersDto;
 import pl.lotto.domain.resultchecker.dto.ResultDto;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 
 class ResultCheckerFacadeTest {
 
@@ -46,7 +45,7 @@ class ResultCheckerFacadeTest {
                                 .drawDate(drawDate)
                                 .build())
         );
-        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().createForTest(winningNumbersGeneratorFacade, numberReceiverFacade, playerRepository);
+        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().resultCheckerFacade(winningNumbersGeneratorFacade, numberReceiverFacade, playerRepository);
         //when
         PlayersDto playersDto = resultCheckerFacade.generateWinners();
         //then
@@ -84,7 +83,7 @@ class ResultCheckerFacadeTest {
         when(winningNumbersGeneratorFacade.generateWinningNumbers()).thenReturn(WinningNumbersDto.builder()
                 .winningNumbers(null)
                 .build());
-        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().createForTest(winningNumbersGeneratorFacade, numberReceiverFacade, playerRepository);
+        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().resultCheckerFacade(winningNumbersGeneratorFacade, numberReceiverFacade, playerRepository);
         //when
         PlayersDto playersDto = resultCheckerFacade.generateWinners();
         //then
@@ -99,7 +98,7 @@ class ResultCheckerFacadeTest {
         when(winningNumbersGeneratorFacade.generateWinningNumbers()).thenReturn(WinningNumbersDto.builder()
                 .winningNumbers(Set.of())
                 .build());
-        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().createForTest(winningNumbersGeneratorFacade, numberReceiverFacade, playerRepository);
+        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().resultCheckerFacade(winningNumbersGeneratorFacade, numberReceiverFacade, playerRepository);
         //when
         PlayersDto playersDto = resultCheckerFacade.generateWinners();
         //then
@@ -133,7 +132,7 @@ class ResultCheckerFacadeTest {
                                 .drawDate(drawDate)
                                 .build())
         );
-        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().createForTest(winningNumbersGeneratorFacade, numberReceiverFacade, playerRepository);
+        ResultCheckerFacade resultCheckerFacade = new ResultCheckerConfiguration().resultCheckerFacade(winningNumbersGeneratorFacade, numberReceiverFacade, playerRepository);
         resultCheckerFacade.generateWinners();
         //when
 
