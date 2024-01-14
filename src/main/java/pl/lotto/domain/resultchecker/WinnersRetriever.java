@@ -3,6 +3,7 @@ package pl.lotto.domain.resultchecker;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
