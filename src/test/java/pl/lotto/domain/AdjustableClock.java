@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+
 public class AdjustableClock extends Clock {
 
     private final ZoneId zone;
@@ -99,4 +100,8 @@ public class AdjustableClock extends Clock {
         setClockToLocalDateTime(localDateTime);
     }
 
+    public void plusMinutes(int minutes) {
+        Duration offset = Duration.ofHours(minutes);
+        advanceInTimeBy(offset);
+    }
 }
