@@ -11,4 +11,6 @@ public interface WinningNumbersRepository extends MongoRepository<WinningNumbers
     Optional<WinningNumbers> findNumbersByDate(LocalDateTime date);
 
     boolean existsByDate(LocalDateTime nextDrawDate);
+
+    WinningNumbers save(WinningNumbers winningNumbers);
 }
