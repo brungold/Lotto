@@ -16,10 +16,16 @@ public class WinningNumbersRepositoryTestImpl implements WinningNumbersRepositor
 
     private final Map<LocalDateTime, WinningNumbers> winningNumbersList = new ConcurrentHashMap<>();
 
+//    @Override
+//    public <S extends WinningNumbers> S save(S entity) {
+//        winningNumbersList.put(entity.date(), entity);
+//        return entity;
+//    }
+
     @Override
-    public <S extends WinningNumbers> S save(S entity) {
-        winningNumbersList.put(entity.date(), entity);
-        return entity;
+    public WinningNumbers save(WinningNumbers winningNumbers) {
+        winningNumbersList.put(winningNumbers.date(), winningNumbers);
+        return winningNumbers;
     }
 
     @Override
